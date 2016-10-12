@@ -17,6 +17,8 @@ int cumleSayisi = 0;
 
 int main(){
 
+	remove("yaz.txt"); // varsa yaz.txt'i sil
+	
 	okuma();
 	parcala();
 	yazma();	

@@ -4,13 +4,13 @@
 
 using namespace std;
 
-void okuma();
-void parcala();
-bool Tekrarkontrolu(string x);
-void yazma();
+void okuma(); // dosya okuma fonksiyonu
+void parcala(); // okunan string'i cümlelere parçalayan fonksiyon
+bool Tekrarkontrolu(string x); // cümle tekrarını bulan fonksiyon
+void yazma(); // dosyaya yazan fonksiyon
 
-string yazi;
-string *parcali;
+string yazi; // okunan string
+string *parcali; // cümleleri tutan dinamik dizi
 string *kontrol;
 int noktaSayisi = 0;
 int cumleSayisi = 0;
@@ -27,32 +27,32 @@ int main(){
 void okuma(){
 
 	fstream oku("oku.txt");
-	while (!oku.eof())
+	while (!oku.eof())  // dosya sonuna ulaşılmadıysa eğer
 	{
-		getline(oku, yazi);
+		getline(oku, yazi); // satır satır oku.
 	}
 }
 
 void parcala(){
 
-	for (int i = 0; i < yazi.length();i++){
-		if (yazi[i] == '.'){
+	for (int i = 0; i < yazi.length();i++){   // nokta sayısını bul (nokta kadar cümle var.)
+		if (yazi[i] == '.'){                   
 			noktaSayisi++;
 		}
 	}
 
 	cumleSayisi = noktaSayisi;
 	
-	parcali = new string[noktaSayisi];
+	parcali = new string[noktaSayisi];            // dinamik dizi oluştur
 	int j = 0;
 	
-	for (int i = 0; i < yazi.length(); i++){
+	for (int i = 0; i < yazi.length(); i++){    // cümleler arası boşlukları alma(boşluk varsa)
 		if (yazi[i] == ' '){
 			if (yazi[i - 1] == '.'){			
 				continue;
 			}
 			else{
-				parcali[j] += yazi[i];
+				parcali[j] += yazi[i];           
 				continue;
 			}
 		}
@@ -64,10 +64,10 @@ void parcala(){
 		}
 	}
 
-	kontrol = new string[cumleSayisi];
+	kontrol = new string[cumleSayisi];     // dinamik olarak kontrol dizisi oluştur
 }
 
-bool Tekrarkontrolu(string x){
+bool Tekrarkontrolu(string x){        // tekrar eden cümleleri tespit et
 	
 	int i;
 
@@ -88,7 +88,7 @@ bool Tekrarkontrolu(string x){
 
 void yazma(){
 
-	int adet = 0;
+	int adet = 0;   // tekrar eden cümle sayacı
 	ofstream yaz;
 
 	for (int i = 0; i < cumleSayisi; i++){
